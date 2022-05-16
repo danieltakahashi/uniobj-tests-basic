@@ -10,38 +10,28 @@ use src\Number\Multiple\Strategy\ThreeOrFive;
 
 class MultiplesTest extends TestCase
 {
-    protected Multiples $multiples;
-
     /**
-     * @return void
+     * @param int $expected
+     * @param string $strategyInterface
+     * @dataProvider strategyProvider
      */
-    public function testMultipleOfThreeOrFive(): void
+    public function testMultiples($expected, $strategyInterface): void
     {
-        $multiple = new Multiples(new ThreeOrFive());
+        $multiple = new Multiples(new $strategyInterface());
         $result = $multiple->inRange(0, 1000);
 
-        $this->assertEquals(233168, $result);
+        $this->assertEquals($expected, $result);
     }
 
     /**
-     * @return void
+     * @return array<int, array<int, int|string>>
      */
-    public function testMultipleOfThreeAndFive(): void
+    public function strategyProvider(): array
     {
-        $multiple = new Multiples(new ThreeAndFive());
-        $result = $multiple->inRange(0, 1000);
-
-        $this->assertEquals(33165, $result);
-    }
-
-    /**
-     * @return void
-     */
-    public function testMultipleOfThreeOrFiveAndSeven(): void
-    {
-        $multiple = new Multiples(new ThreeAndFiveOrSeven());
-        $result = $multiple->inRange(0, 1000);
-
-        $this->assertEquals(33173, $result);
+        return [
+            [233168, ThreeOrFive::class],
+            [33165, ThreeAndFive::class],
+            [33173, ThreeAndFiveOrSeven::class],
+        ];
     }
 }
