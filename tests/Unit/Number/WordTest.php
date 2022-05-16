@@ -3,9 +3,7 @@
 namespace tests\Unit\Number;
 
 use PHPUnit\Framework\TestCase;
-use src\Number\Happy\Happy;
 use src\Number\Multiple\Strategy\Prime;
-use src\Number\Multiple\Strategy\ThreeAndFive;
 use src\Number\Multiple\Strategy\ThreeOrFive;
 use src\Number\Word\Word;
 
