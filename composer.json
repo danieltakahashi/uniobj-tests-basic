@@ -1,4 +1,13 @@
 {
+    "name": "daniel.takahashi/test",
+    "description": "Exercicios de testes",
+    "authors": [
+        {
+            "name": "Daniel",
+            "email": "daniel.arbext@gmail.com"
+        }
+    ],
+    "require": {},
     "require-dev": {
         "phpunit/phpunit": "^9",
         "phpstan/phpstan": "^1.6",
