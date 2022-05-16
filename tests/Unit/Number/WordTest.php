@@ -24,7 +24,7 @@ class WordTest extends TestCase
     public function testFilterWord(): void
     {
         $this->word->setWord('BA234AaAds34f');
-        
+
         $this->assertEquals('BAAaAdsf', $this->word->word);
     }
 

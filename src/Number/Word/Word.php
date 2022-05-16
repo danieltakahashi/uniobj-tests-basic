@@ -24,7 +24,7 @@ class Word
         $alphabet = array_merge(range('a', 'z'), range('A', 'Z'));
         array_unshift($alphabet, null);
         unset($alphabet[0]);
-        
+
         $this->alphabet = $alphabet;
     }
 
