@@ -3,10 +3,14 @@
 namespace tests\Unit\Store;
 
 use PHPUnit\Framework\TestCase;
-use src\Store\Cart\Cart;
-use src\Store\Checkout\Checkout;
-use src\Store\Checkout\Service\Correio;
-use src\Store\User\User;
+use src\Store\{
+    Cart\Cart,
+    User\User
+};
+use src\Store\Checkout\{
+    Checkout,
+    Service\Correio
+};
 
 class CheckoutTest extends TestCase
 {

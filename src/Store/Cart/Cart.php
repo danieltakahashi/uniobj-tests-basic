@@ -2,8 +2,10 @@
 
 namespace src\Store\Cart;
 
-use src\Store\Product\Product;
-use src\Store\User\User;
+use src\Store\{
+    Product\Product,
+    User\User
+};
 
 class Cart
 {

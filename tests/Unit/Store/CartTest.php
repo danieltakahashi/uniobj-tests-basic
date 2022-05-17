@@ -3,9 +3,11 @@
 namespace tests\Unit\Store;
 
 use PHPUnit\Framework\TestCase;
-use src\Store\Cart\Cart;
-use src\Store\Product\Product;
-use src\Store\User\User;
+use src\Store\{
+    Cart\Cart,
+    Product\Product,
+    User\User
+};
 
 class CartTest extends TestCase
 {
