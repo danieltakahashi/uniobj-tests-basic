@@ -1,4 +1,4 @@
-name: PHP Composer
+name: PHP
 
 on:
   push:
@@ -38,5 +38,5 @@ jobs:
     - name: PHP Code Sniffer
       run: vendor/bin/phpcs --standard=PSR12 tests/ src/
       
-    - name: Run test suite
+    - name: Run Test Suite
       run: vendor/bin/phpunit
