@@ -4,8 +4,6 @@ namespace src\Number\Word;
 
 use src\Number\Happy\Happy;
 use src\Number\Multiple\Multiples;
-use src\Number\Multiple\Strategy\Prime;
-use src\Number\Multiple\Strategy\ThreeOrFive;
 
 class Word
 {

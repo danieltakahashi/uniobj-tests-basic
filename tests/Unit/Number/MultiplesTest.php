@@ -3,10 +3,12 @@
 namespace tests\Unit\Number;
 
 use PHPUnit\Framework\TestCase;
-use src\Number\Multiple\Multiples;
-use src\Number\Multiple\Strategy\ThreeAndFive;
-use src\Number\Multiple\Strategy\ThreeAndFiveOrSeven;
-use src\Number\Multiple\Strategy\ThreeOrFive;
+use src\Number\Multiple\{
+    Multiples,
+    Strategy\ThreeAndFive,
+    Strategy\ThreeAndFiveOrSeven,
+    Strategy\ThreeOrFive
+};
 
 class MultiplesTest extends TestCase
 {
