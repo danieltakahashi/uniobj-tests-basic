@@ -13,33 +13,15 @@ class CartTest extends TestCase
 {
     private Cart $cart;
 
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
-        $this->cart = new Cart();
-    }
-
-    /**
-     * @return void
-     */
-    public function testSetUser(): void
-    {
         $user = $this->createStub(User::class);
 
-        $this->assertTrue($this->cart->setUser($user));
+        $this->cart = new Cart($user);
     }
 
-    /**
-     * @return void
-     */
     public function testGetUser(): void
     {
-        $user = $this->createStub(User::class);
-
-        $this->cart->setUser($user);
-
         $this->assertInstanceOf(User::class, $this->cart->getUser());
     }
 
@@ -69,8 +51,8 @@ class CartTest extends TestCase
             ->willReturn(1);
 
         $this->cart->addProduct($product);
-        $this->cart->rmProduct($product);
 
+        $this->assertTrue($this->cart->rmProduct($product));
         $this->assertEquals(0.00, $this->cart->getTotalValue());
     }
 

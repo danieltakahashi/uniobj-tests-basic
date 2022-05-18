@@ -22,6 +22,7 @@ class CheckoutTest extends TestCase
     public function testFreeShipping($expected, $cartTotalValue): void
     {
         $cart = $this->getMockBuilder(Cart::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['getTotalValue'])
             ->getMock();
         $cart->expects($this->once())
@@ -44,6 +45,7 @@ class CheckoutTest extends TestCase
         $user = $this->createStub(User::class);
 
         $cart = $this->getMockBuilder(Cart::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['getUser', 'getTotalValue'])
             ->getMock();
         $cart->expects($this->once())
@@ -71,6 +73,7 @@ class CheckoutTest extends TestCase
         $user = $this->createStub(User::class);
 
         $cart = $this->getMockBuilder(Cart::class)
+            ->disableOriginalConstructor()
             ->onlyMethods(['getUser', 'getTotalValue'])
             ->getMock();
         $cart->expects($this->once())

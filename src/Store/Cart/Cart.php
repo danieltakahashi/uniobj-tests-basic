@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace src\Store\Cart;
 
 use src\Store\{
@@ -10,35 +12,22 @@ use src\Store\{
 class Cart
 {
     /**
-     * @var array<Product>
+     * @var array<int, Product>
      */
     private array $products = [];
 
     private User $user;
 
-    /**
-     * @param User $user
-     * @return bool
-     */
-    public function setUser(User $user): bool
+    public function __construct(User $user)
     {
         $this->user = $user;
-
-        return true;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @param Product $product
-     * @return bool
-     */
     public function addProduct(Product $product): bool
     {
         array_push($this->products, $product);
@@ -46,30 +35,20 @@ class Cart
         return true;
     }
 
-    /**
-     * @param Product $product
-     * @return bool
-     */
     public function rmProduct(Product $product): bool
     {
         $key = array_search($product, $this->products);
         if (isset($this->products[$key])) {
-            array_splice($this->products, $key, 1);
+            array_splice($this->products, $key);
         }
 
         return true;
     }
 
-    /**
-     * @param Product $product
-     * @return bool
-     */
     public function updateProduct(Product $product): bool
     {
-        if ($product->getQuantity() == 0) {
-            $this->rmProduct($product);
-
-            return true;
+        if ($product->getQuantity() === 0) {
+            return $this->rmProduct($product);
         }
 
         $key = array_search($product, $this->products);
@@ -83,16 +62,13 @@ class Cart
     }
 
     /**
-     * @return array<Product>
+     * @return array<int, Product>
      */
     public function getProducts(): array
     {
         return $this->products;
     }
 
-    /**
-     * @return float
-     */
     public function getTotalValue(): float
     {
         $total = 0;
