@@ -13,11 +13,9 @@ use src\Number\Multiple\{
 class MultiplesTest extends TestCase
 {
     /**
-     * @param int $expected
-     * @param string $strategyInterface
      * @dataProvider strategyProvider
      */
-    public function testMultiples($expected, $strategyInterface): void
+    public function testMultiples(int $expected, string $strategyInterface): void
     {
         $multiple = new Multiples(new $strategyInterface());
         $result = $multiple->inRange(0, 1000);
