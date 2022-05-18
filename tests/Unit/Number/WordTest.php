@@ -9,21 +9,14 @@ use src\Number\Word\Word;
 
 class WordTest extends TestCase
 {
-    private Word $word;
-
-    public function setUp(): void
-    {
-        $this->word = new Word();
-    }
-
     /**
      * @return void
      */
     public function testFilterWord(): void
     {
-        $this->word->setWord('BA234AaAds34f');
+        $word = new Word('BA234AaAds34f');
 
-        $this->assertEquals('BAAaAdsf', $this->word->word);
+        $this->assertEquals('BAAaAdsf', $word->getWord());
     }
 
     /**
@@ -31,9 +24,9 @@ class WordTest extends TestCase
      */
     public function testIsPrimeNumber(): void
     {
-        $this->word->setWord('b');
+        $word = new Word('b');
 
-        $this->assertTrue($this->word->isMultiple(Prime::class));
+        $this->assertTrue($word->isMultiple(Prime::class));
     }
 
     /**
@@ -41,9 +34,9 @@ class WordTest extends TestCase
      */
     public function testIsNotPrimeNumber(): void
     {
-        $this->word->setWord('d');
+        $word = new Word('d');
 
-        $this->assertFalse($this->word->isMultiple(Prime::class));
+        $this->assertFalse($word->isMultiple(Prime::class));
     }
 
     /**
@@ -51,9 +44,9 @@ class WordTest extends TestCase
      */
     public function testIsHappy(): void
     {
-        $this->word->setWord('g');
+        $word = new Word('g');
 
-        $this->assertTrue($this->word->isHappy());
+        $this->assertTrue($word->isHappy());
     }
 
     /**
@@ -61,9 +54,9 @@ class WordTest extends TestCase
      */
     public function testIsNotHappy(): void
     {
-        $this->word->setWord('Test');
+        $word = new Word('Test');
 
-        $this->assertFalse($this->word->isHappy());
+        $this->assertFalse($word->isHappy());
     }
 
     /**
@@ -71,9 +64,9 @@ class WordTest extends TestCase
      */
     public function testIsMultipleOfThreeOrFive(): void
     {
-        $this->word->setWord('DANIEL');
+        $word = new Word('DANIEL');
 
-        $this->assertTrue($this->word->isMultiple(ThreeOrFive::class));
+        $this->assertTrue($word->isMultiple(ThreeOrFive::class));
     }
 
     /**
@@ -81,8 +74,8 @@ class WordTest extends TestCase
      */
     public function testIsNotMultipleOfThreeOrFive(): void
     {
-        $this->word->setWord('Daniel');
+        $word = new Word('Daniel');
 
-        $this->assertFalse($this->word->isMultiple(ThreeOrFive::class));
+        $this->assertFalse($word->isMultiple(ThreeOrFive::class));
     }
 }

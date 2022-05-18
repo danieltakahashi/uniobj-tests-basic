@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace src\Store\Checkout;
 
 use src\Store\Cart\Cart;
@@ -12,27 +14,17 @@ class Checkout
     private Cart $cart;
     private IService $service;
 
-    /**
-     * @param Cart $cart
-     * @param IService $service
-     */
     public function __construct(Cart $cart, IService $service)
     {
         $this->cart = $cart;
         $this->service = $service;
     }
 
-    /**
-     * @return bool
-     */
     public function isFreeShipping(): bool
     {
         return $this->cart->getTotalValue() >= self::FREE_SHIPPING_VALUE;
     }
 
-    /**
-     * @return float
-     */
     public function shippingValue(): float
     {
         if ($this->isFreeShipping()) {
@@ -44,9 +36,6 @@ class Checkout
         return $this->service->shippingValue($postalCode);
     }
 
-    /**
-     * @return float
-     */
     public function getTotalValue(): float
     {
         return $this->cart->getTotalValue() + $this->shippingValue();

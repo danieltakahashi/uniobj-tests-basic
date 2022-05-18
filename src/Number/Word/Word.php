@@ -1,11 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace src\Number\Word;
 
 use src\Number\Happy\Happy;
 use src\Number\Multiple\Multiples;
-use src\Number\Multiple\Strategy\Prime;
-use src\Number\Multiple\Strategy\ThreeOrFive;
 
 class Word
 {
@@ -14,13 +14,12 @@ class Word
      */
     private array $alphabet;
 
-    /**
-     * @var string
-     */
-    public string $word;
+    private string $word;
 
-    public function __construct()
+    public function __construct(string $word)
     {
+        $this->word = $this->filterWord($word);
+
         $alphabet = array_merge(range('a', 'z'), range('A', 'Z'));
         array_unshift($alphabet, null);
         unset($alphabet[0]);
@@ -28,27 +27,11 @@ class Word
         $this->alphabet = $alphabet;
     }
 
-    /**
-     * @param string $word
-     * @return void
-     */
-    public function setWord(string $word): void
+    public function getWord(): string
     {
-        $this->word = $this->filterWord($word);
+        return $this->word;
     }
 
-    /**
-     * @param string $word
-     * @return string
-     */
-    private function filterWord(string $word): string
-    {
-        return preg_replace("/[^a-zA-Z]+/", "", $word);
-    }
-
-    /**
-     * @return int
-     */
     public function getTotalSum(): int
     {
         $letters = str_split($this->word, 1);
@@ -61,28 +44,23 @@ class Word
         return $result;
     }
 
-    /**
-     * @param string $letter
-     * @return int
-     */
-    private function alphabetToNumber(string $letter): int
-    {
-        return array_search($letter, $this->alphabet);
-    }
-
-    /**
-     * @return bool
-     */
     public function isHappy(): bool
     {
         return (new Happy())->isHappy($this->getTotalSum());
     }
 
-    /**
-     * @return bool
-     */
     public function isMultiple(string $strategyClass): bool
     {
         return (new Multiples(new $strategyClass()))->fit($this->getTotalSum());
+    }
+
+    private function filterWord(string $word): string
+    {
+        return preg_replace('/[^a-zA-Z]+/', '', $word);
+    }
+
+    private function alphabetToNumber(string $letter): int
+    {
+        return array_search($letter, $this->alphabet);
     }
 }
