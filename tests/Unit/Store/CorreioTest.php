@@ -7,9 +7,6 @@ use src\Store\Checkout\Service\Correio;
 
 class CorreioTest extends TestCase
 {
-    /**
-     * @return void
-     */
     public function testShippingValue(): void
     {
         $correio = new Correio();

@@ -28,7 +28,6 @@ class CheckoutTest extends TestCase
 
     /**
      * @dataProvider shippingProvider
-     * @return void
      */
     public function testShippingValue(float $expected, float $cartTotalValue): void
     {
@@ -47,9 +46,6 @@ class CheckoutTest extends TestCase
         $this->assertEquals($expected, $shippingValue);
     }
 
-    /**
-     * @return void
-     */
     public function testTotalCheckoutValue(): void
     {
         $user = $this->createStub(IUser::class);
