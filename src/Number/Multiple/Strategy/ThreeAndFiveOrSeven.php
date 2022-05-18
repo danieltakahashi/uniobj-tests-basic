@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace src\Number\Multiple\Strategy;
 
-class ThreeAndFiveOrSeven implements IStrategy
+final class ThreeAndFiveOrSeven implements IStrategy
 {
     public function fit(int $number): bool
     {

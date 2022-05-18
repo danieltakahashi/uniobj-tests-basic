@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace src\Store\User;
 
-class User
+final class User implements IUser
 {
     private string $name;
     private string $postalCode;

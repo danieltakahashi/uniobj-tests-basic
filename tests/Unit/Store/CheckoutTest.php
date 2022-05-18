@@ -3,29 +3,24 @@
 namespace tests\Unit\Store;
 
 use PHPUnit\Framework\TestCase;
-use src\Store\Cart\Cart;
+use src\Store\Cart\ICart;
 use src\Store\Checkout\Checkout;
 use src\Store\Checkout\Service\Correio;
-use src\Store\User\User;
+use src\Store\Checkout\Service\IService;
+use src\Store\User\IUser;
 
 class CheckoutTest extends TestCase
 {
     /**
-     * @param bool $expected
-     * @param float $cartTotalValue
      * @dataProvider freeShippingProvider
      */
-    public function testFreeShipping($expected, $cartTotalValue): void
+    public function testFreeShipping(bool $expected, float $cartTotalValue): void
     {
-        $cart = $this->getMockBuilder(Cart::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['getTotalValue'])
-            ->getMock();
-        $cart->expects($this->once())
-            ->method('getTotalValue')
+        $cart = $this->createMock(ICart::class);
+        $cart->method('getTotalValue')
             ->willReturn($cartTotalValue);
 
-        $correio = $this->createStub(Correio::class);
+        $correio = $this->createStub(IService::class);
 
         $checkout = new Checkout($cart, $correio);
 
@@ -38,19 +33,11 @@ class CheckoutTest extends TestCase
      */
     public function testShippingValue(float $expected, float $cartTotalValue): void
     {
-        $user = $this->createStub(User::class);
-
-        $cart = $this->getMockBuilder(Cart::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['getUser', 'getTotalValue'])
-            ->getMock();
-        $cart->expects($this->once())
-            ->method('getTotalValue')
+        $cart = $this->createMock(ICart::class);
+        $cart->method('getTotalValue')
             ->willReturn($cartTotalValue);
 
-        $correio = $this->getMockBuilder(Correio::class)
-            ->onlyMethods(['shippingValue'])
-            ->getMock();
+        $correio = $this->createMock(IService::class);
         $correio->expects($this->atMost(1))
             ->method('shippingValue')
             ->willReturn($expected);
@@ -66,22 +53,17 @@ class CheckoutTest extends TestCase
      */
     public function testTotalCheckoutValue(): void
     {
-        $user = $this->createStub(User::class);
+        $user = $this->createStub(IUser::class);
 
-        $cart = $this->getMockBuilder(Cart::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['getUser', 'getTotalValue'])
-            ->getMock();
-        $cart->expects($this->once())
-            ->method('getUser')
-            ->willReturn($user);
+        $cart = $this->createMock(ICart::class);
         $cart->expects($this->exactly(2))
             ->method('getTotalValue')
             ->willReturn(18.00);
+        $cart->expects($this->once())
+            ->method('getUser')
+            ->willReturn($user);
 
-        $correio = $this->getMockBuilder(Correio::class)
-            ->onlyMethods(['shippingValue'])
-            ->getMock();
+        $correio = $this->createMock(IService::class);
         $correio->expects($this->once())
             ->method('shippingValue')
             ->willReturn(12.11);

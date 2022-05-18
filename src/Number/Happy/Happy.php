@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace src\Number\Happy;
 
-class Happy
+final class Happy implements IHappy
 {
     /**
      * @var array<int>
@@ -28,7 +28,7 @@ class Happy
         return true;
     }
 
-    private function sumPow(int $numbers): int
+    public function sumPow(int $numbers): int
     {
         $result = 0;
 
@@ -42,12 +42,12 @@ class Happy
         return $result;
     }
 
-    private function putHistory(int $number): void
+    public function putHistory(int $number): void
     {
         array_push($this->numberHistory, $number);
     }
 
-    private function isValid(int $number): bool
+    public function isValid(int $number): bool
     {
         if ($number < 0) {
             throw new \Exception('Invalid number');
