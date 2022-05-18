@@ -3,11 +3,9 @@
 namespace tests\Unit\Store;
 
 use PHPUnit\Framework\TestCase;
-use src\Store\{
-    Cart\Cart,
-    Product\Product,
-    User\User
-};
+use src\Store\Cart\Cart;
+use src\Store\Product\IProduct;
+use src\Store\User\IUser;
 
 class CartTest extends TestCase
 {
@@ -15,36 +13,26 @@ class CartTest extends TestCase
 
     public function setUp(): void
     {
-        $user = $this->createStub(User::class);
+        $user = $this->createStub(IUser::class);
 
         $this->cart = new Cart($user);
     }
 
     public function testGetUser(): void
     {
-        $this->assertInstanceOf(User::class, $this->cart->getUser());
+        $this->assertInstanceOf(IUser::class, $this->cart->getUser());
     }
 
-    /**
-     * @return void
-     */
     public function testAddProduct(): void
     {
-        $product = $this->getMockBuilder(Product::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $product = $this->createMock(IProduct::class);
 
         $this->assertTrue($this->cart->addProduct($product));
     }
 
-    /**
-     * @return void
-     */
     public function testRemoveProduct(): void
     {
-        $product = $this->getMockBuilder(Product::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $product = $this->createMock(IProduct::class);
         $product->method('getValue')
             ->willReturn(1.22);
         $product->method('getQuantity')
@@ -56,14 +44,9 @@ class CartTest extends TestCase
         $this->assertEquals(0.00, $this->cart->getTotalValue());
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateProduct(): void
     {
-        $product = $this->getMockBuilder(Product::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $product = $this->createMock(IProduct::class);
         $product->method('getValue')
             ->willReturn(1.20);
         $product->method('getQuantity')
@@ -76,14 +59,9 @@ class CartTest extends TestCase
         $this->assertEquals(2.40, $this->cart->getTotalValue());
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateUnsetedProduct(): void
     {
-        $product = $this->getMockBuilder(Product::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $product = $this->createMock(IProduct::class);
         $product->method('getValue')
             ->willReturn(1.20);
         $product->method('getQuantity')
@@ -93,14 +71,9 @@ class CartTest extends TestCase
         $this->assertCount(1, $this->cart->getProducts());
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateToZeroProduct(): void
     {
-        $product = $this->getMockBuilder(Product::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $product = $this->createMock(IProduct::class);
         $product->method('getValue')
             ->willReturn(1.20);
         $product->method('getQuantity')
@@ -110,18 +83,10 @@ class CartTest extends TestCase
         $this->assertCount(0, $this->cart->getProducts());
     }
 
-    /**
-     * @return void
-     */
     public function testGetProducts(): void
     {
-        $product1 = $this->getMockBuilder(Product::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $product2 = $this->getMockBuilder(Product::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $product1 = $this->createMock(IProduct::class);
+        $product2 = $this->createMock(IProduct::class);
 
         $this->cart->addProduct($product1);
         $this->cart->addProduct($product2);
@@ -129,15 +94,9 @@ class CartTest extends TestCase
         $this->assertEquals(2, count($this->cart->getProducts()));
     }
 
-    /**
-     * @return void
-     */
     public function testGetTotalValue(): void
     {
-        $product = $this->getMockBuilder(Product::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
+        $product = $this->createMock(IProduct::class);
         $product->method('getValue')
             ->willReturn(3.71);
         $product->method('getQuantity')

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace src\Number\Multiple\Strategy;
 
-class Prime implements IStrategy
+final class Prime implements IStrategy
 {
     public function fit(int $number): bool
     {

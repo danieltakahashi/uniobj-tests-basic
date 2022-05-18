@@ -7,9 +7,6 @@ use src\Store\Product\Product;
 
 class ProductTest extends TestCase
 {
-    /**
-     * @return void
-     */
     public function testProduct(): void
     {
         $product = new Product('Chocolate', 6.32, 3);

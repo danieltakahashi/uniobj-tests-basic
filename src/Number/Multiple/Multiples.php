@@ -6,7 +6,7 @@ namespace src\Number\Multiple;
 
 use src\Number\Multiple\Strategy\IStrategy;
 
-class Multiples
+final class Multiples implements IMultiples
 {
     private IStrategy $strategy;
 

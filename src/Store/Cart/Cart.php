@@ -4,38 +4,36 @@ declare(strict_types=1);
 
 namespace src\Store\Cart;
 
-use src\Store\{
-    Product\Product,
-    User\User
-};
+use src\Store\Product\IProduct;
+use src\Store\User\IUser;
 
-class Cart
+final class Cart implements ICart
 {
     /**
-     * @var array<int, Product>
+     * @var array<int, IProduct>
      */
     private array $products = [];
 
-    private User $user;
+    private IUser $user;
 
-    public function __construct(User $user)
+    public function __construct(IUser $user)
     {
         $this->user = $user;
     }
 
-    public function getUser(): User
+    public function getUser(): IUser
     {
         return $this->user;
     }
 
-    public function addProduct(Product $product): bool
+    public function addProduct(IProduct $product): bool
     {
         array_push($this->products, $product);
 
         return true;
     }
 
-    public function rmProduct(Product $product): bool
+    public function rmProduct(IProduct $product): bool
     {
         $key = array_search($product, $this->products);
         if (isset($this->products[$key])) {
@@ -45,7 +43,7 @@ class Cart
         return true;
     }
 
-    public function updateProduct(Product $product): bool
+    public function updateProduct(IProduct $product): bool
     {
         if ($product->getQuantity() === 0) {
             return $this->rmProduct($product);
@@ -62,7 +60,7 @@ class Cart
     }
 
     /**
-     * @return array<int, Product>
+     * @return array<int, IProduct>
      */
     public function getProducts(): array
     {

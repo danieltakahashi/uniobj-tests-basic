@@ -7,7 +7,7 @@ namespace src\Number\Word;
 use src\Number\Happy\Happy;
 use src\Number\Multiple\Multiples;
 
-class Word
+final class Word
 {
     /**
      * @var array<int, string>
@@ -54,12 +54,12 @@ class Word
         return (new Multiples(new $strategyClass()))->fit($this->getTotalSum());
     }
 
-    private function filterWord(string $word): string
+    public function filterWord(string $word): string
     {
         return preg_replace('/[^a-zA-Z]+/', '', $word);
     }
 
-    private function alphabetToNumber(string $letter): int
+    public function alphabetToNumber(string $letter): int
     {
         return array_search($letter, $this->alphabet);
     }

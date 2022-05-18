@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace src\Store\Checkout;
 
-use src\Store\Cart\Cart;
+use src\Store\Cart\ICart;
 use src\Store\Checkout\Service\IService;
 
-class Checkout
+final class Checkout implements ICheckout
 {
     public const FREE_SHIPPING_VALUE = 100.00;
 
-    private Cart $cart;
+    private ICart $cart;
     private IService $service;
 
-    public function __construct(Cart $cart, IService $service)
+    public function __construct(ICart $cart, IService $service)
     {
         $this->cart = $cart;
         $this->service = $service;

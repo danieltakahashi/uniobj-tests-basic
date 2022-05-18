@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace src\Store\Product;
 
-class Product
+final class Product implements IProduct
 {
     private string $name;
     private float $value;
