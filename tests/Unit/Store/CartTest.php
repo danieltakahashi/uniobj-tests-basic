@@ -5,7 +5,6 @@ namespace tests\Unit\Store;
 use PHPUnit\Framework\TestCase;
 use src\Store\Cart\Cart;
 use src\Store\Product\IProduct;
-use src\Store\Product\Product;
 use src\Store\User\IUser;
 
 class CartTest extends TestCase

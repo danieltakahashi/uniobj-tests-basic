@@ -5,7 +5,6 @@ namespace tests\Unit\Store;
 use PHPUnit\Framework\TestCase;
 use src\Store\Cart\ICart;
 use src\Store\Checkout\Checkout;
-use src\Store\Checkout\Service\Correio;
 use src\Store\Checkout\Service\IService;
 use src\Store\User\IUser;
 

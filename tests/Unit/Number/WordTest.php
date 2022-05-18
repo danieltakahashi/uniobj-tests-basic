@@ -3,9 +3,11 @@
 namespace tests\Unit\Number;
 
 use PHPUnit\Framework\TestCase;
-use src\Number\Multiple\Strategy\Prime;
-use src\Number\Multiple\Strategy\ThreeOrFive;
 use src\Number\Word\Word;
+use src\Number\Multiple\Strategy\{
+    Prime,
+    ThreeOrFive
+};
 
 class WordTest extends TestCase
 {
