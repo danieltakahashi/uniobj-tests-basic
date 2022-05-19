@@ -36,7 +36,7 @@ final class Cart implements ICart
     public function rmProduct(IProduct $product): bool
     {
         $key = array_search($product, $this->products);
-        if (isset($this->products[$key])) {
+        if ($key !== false) {
             array_splice($this->products, $key);
         }
 

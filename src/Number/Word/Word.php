@@ -6,6 +6,7 @@ namespace src\Number\Word;
 
 use src\Number\Happy\Happy;
 use src\Number\Multiple\Multiples;
+use src\Number\Multiple\Strategy\IStrategy;
 
 final class Word
 {
@@ -49,17 +50,17 @@ final class Word
         return (new Happy())->isHappy($this->getTotalSum());
     }
 
-    public function isMultiple(string $strategyClass): bool
+    public function isMultiple(IStrategy $strategyClass): bool
     {
-        return (new Multiples(new $strategyClass()))->fit($this->getTotalSum());
+        return (new Multiples($strategyClass))->fit($this->getTotalSum());
     }
 
     public function filterWord(string $word): string
     {
-        return preg_replace('/[^a-zA-Z]+/', '', $word);
+        return preg_replace('/[^a-zA-Z]+/', '', $word) ?? '';
     }
 
-    public function alphabetToNumber(string $letter): int
+    public function alphabetToNumber(string $letter): int|false
     {
         return array_search($letter, $this->alphabet);
     }

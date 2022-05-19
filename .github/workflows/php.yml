@@ -33,7 +33,7 @@ jobs:
       run: composer install --prefer-dist --no-progress
       
     - name: PHPStan
-      run: vendor/bin/phpstan analyse src tests --level=6
+      run: vendor/bin/phpstan analyse src tests --level=9
       
     - name: PHP Code Sniffer
       run: vendor/bin/phpcs --standard=PSR12 tests/ src/
