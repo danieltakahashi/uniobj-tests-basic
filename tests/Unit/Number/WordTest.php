@@ -22,14 +22,14 @@ class WordTest extends TestCase
     {
         $word = new Word('b');
 
-        $this->assertTrue($word->isMultiple(Prime::class));
+        $this->assertTrue($word->isMultiple(new Prime()));
     }
 
     public function testIsNotPrimeNumber(): void
     {
         $word = new Word('d');
 
-        $this->assertFalse($word->isMultiple(Prime::class));
+        $this->assertFalse($word->isMultiple(new Prime()));
     }
 
     public function testIsHappy(): void
@@ -50,13 +50,13 @@ class WordTest extends TestCase
     {
         $word = new Word('DANIEL');
 
-        $this->assertTrue($word->isMultiple(ThreeOrFive::class));
+        $this->assertTrue($word->isMultiple(new ThreeOrFive()));
     }
 
     public function testIsNotMultipleOfThreeOrFive(): void
     {
         $word = new Word('Daniel');
 
-        $this->assertFalse($word->isMultiple(ThreeOrFive::class));
+        $this->assertFalse($word->isMultiple(new ThreeOrFive()));
     }
 }

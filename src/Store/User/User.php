@@ -22,6 +22,6 @@ final class User implements IUser
 
     public function getPostalCode(): string
     {
-        return preg_replace('/\D/', '', $this->postalCode);
+        return preg_replace('/\D/', '', $this->postalCode) ?? '';
     }
 }

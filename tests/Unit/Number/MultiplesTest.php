@@ -9,29 +9,30 @@ use src\Number\Multiple\{
     Strategy\ThreeAndFiveOrSeven,
     Strategy\ThreeOrFive
 };
+use src\Number\Multiple\Strategy\IStrategy;
 
 class MultiplesTest extends TestCase
 {
     /**
      * @dataProvider strategyProvider
      */
-    public function testMultiples(int $expected, string $strategyInterface): void
+    public function testMultiples(int $expected, IStrategy $strategyInterface): void
     {
-        $multiple = new Multiples(new $strategyInterface());
+        $multiple = new Multiples($strategyInterface);
         $result = $multiple->inRange(0, 1000);
 
         $this->assertEquals($expected, $result);
     }
 
     /**
-     * @return array<int, array<int, int|string>>
+     * @return array<int, array<int, int|ThreeAndFive|ThreeAndFiveOrSeven|ThreeOrFive>>
      */
     public function strategyProvider(): array
     {
         return [
-            [233168, ThreeOrFive::class],
-            [33165, ThreeAndFive::class],
-            [33173, ThreeAndFiveOrSeven::class],
+            [233168, new ThreeOrFive()],
+            [33165, new ThreeAndFive()],
+            [33173, new ThreeAndFiveOrSeven()],
         ];
     }
 }
