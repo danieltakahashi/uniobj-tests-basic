@@ -37,6 +37,12 @@ jobs:
       
     - name: PHP Code Sniffer
       run: vendor/bin/phpcs --standard=PSR12 tests/ src/
+
+    - name: PHP Insights
+      run: vendor/bin/phpinsights --no-interaction --min-quality=99 --min-complexity=83 --min-architecture=99 --min-style=99
       
     - name: Run Test Suite
       run: vendor/bin/phpunit
+
+    - name: Run PHP Infection
+      run: vendor/bin/infection

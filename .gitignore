@@ -2,4 +2,5 @@
 composer.lock
 vendor/*
 cover/*
-infection.*
+infection.log
+infection.html
