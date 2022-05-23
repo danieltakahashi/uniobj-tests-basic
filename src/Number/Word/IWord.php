@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace src\Number\Word;
 
+use src\Number\Multiple\Strategy\IStrategy;
+
 interface IWord
 {
     public function __construct(string $word);
@@ -14,9 +16,9 @@ interface IWord
 
     public function isHappy(): bool;
 
-    public function isMultiple(string $strategyClass): bool;
+    public function isMultiple(IStrategy $strategyClass): bool;
 
     public function filterWord(string $word): string;
 
-    public function alphabetToNumber(string $letter): int;
+    public function alphabetToNumber(string $letter): int|false;
 }

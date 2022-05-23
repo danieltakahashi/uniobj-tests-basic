@@ -8,7 +8,7 @@ use src\Number\Happy\Happy;
 use src\Number\Multiple\Multiples;
 use src\Number\Multiple\Strategy\IStrategy;
 
-final class Word
+final class Word implements IWord
 {
     /**
      * @var array<int, string>
